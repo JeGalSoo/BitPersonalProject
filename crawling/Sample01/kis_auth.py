@@ -33,7 +33,7 @@ clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
 key_bytes = 32
 
-config_root = 'd:\\KIS\\config\\'  # 토큰 파일이 저장될 폴더, 제3자가 찾지 어렵도록 경로 설정하시기 바랍니다.
+config_root = 'C:\\Users\\soo\\study\\새 폴더 (2)\\crawling\\Sample01\\'  # 토큰 파일이 저장될 폴더, 제3자가 찾지 어렵도록 경로 설정하시기 바랍니다.
 #token_tmp = config_root + 'KIS000000'  # 토큰 로컬저장시 파일 이름 지정, 파일이름을 토큰값이 유추가능한 파일명은 삼가바랍니다.
 #token_tmp = config_root + 'KIS' + datetime.today().strftime("%Y%m%d%H%M%S")  # 토큰 로컬저장시 파일명 년월일시분초
 token_tmp = config_root + 'KIS' + datetime.today().strftime("%Y%m%d")  # 토큰 로컬저장시 파일명 년월일
@@ -122,7 +122,7 @@ def isPaperTrading():  # 모의투자 매매
 
 
 # 실전투자면 'prod', 모의투자면 'vps'를 셋팅 하시기 바랍니다.
-def changeTREnv(token_key, svr='prod', product=_cfg['my_prod']):
+def changeTREnv(token_key, svr='vps', product=_cfg['my_prod']):
     cfg = dict()
 
     global _isPaper
@@ -134,26 +134,32 @@ def changeTREnv(token_key, svr='prod', product=_cfg['my_prod']):
         ak1 = 'paper_app'  # 모의투자용 앱키
         ak2 = 'paper_sec'  # 모의투자용 앱시크리트
         _isPaper = True
-
+        
+    print('aaaaaaaaaaaaaaaaaaaaaaaaa',svr,product)
     cfg['my_app'] = _cfg[ak1]
     cfg['my_sec'] = _cfg[ak2]
 
     if svr == 'prod' and product == '01':  # 실전투자 주식투자, 위탁계좌, 투자계좌
+        print('sdafasdfd',_cfg['my_acct'])
         cfg['my_acct'] = _cfg['my_acct_stock']
     elif svr == 'prod' and product == '30':  # 실전투자 증권저축계좌
+        print('sdafasdfd',_cfg['my_acct'])
         cfg['my_acct'] = _cfg['my_acct_stock']
     elif svr == 'prod' and product == '03':  # 실전투자 선물옵션(파생)
-        cfg['my_acct'] = _cfg['my_acct_future']
+        print('sdafasdfd',_cfg['my_acct'])
+        cfg['my_acct'] = _cfg['my_acct_stock']
     elif svr == 'vps' and product == '01':  # 모의투자 주식투자, 위탁계좌, 투자계좌
-        cfg['my_acct'] = _cfg['my_paper_stock']
+        print('sdafasdfd',_cfg['my_acct'])
+        cfg['my_acct'] = _cfg['my_acct']
     elif svr == 'vps' and product == '03':  # 모의투자 선물옵션(파생)
-        cfg['my_acct'] = _cfg['my_paper_future']
+        print('sdafasdfd',_cfg['my_acct'])
+        cfg['my_acct'] = _cfg['my_acct_future']
 
     cfg['my_prod'] = product
     cfg['my_token'] = token_key
     cfg['my_url'] = _cfg[svr]
 
-    # print(cfg)
+    print('asdqwdqwedasdqsaeda',cfg)
     _setTRENV(cfg)
 
 
@@ -165,7 +171,7 @@ def _getResultObject(json_data):
 
 # Token 발급, 유효기간 1일, 6시간 이내 발급시 기존 token값 유지, 발급시 알림톡 무조건 발송
 # 모의투자인 경우  svr='vps', 투자계좌(01)이 아닌경우 product='XX' 변경하세요 (계좌번호 뒤 2자리)
-def auth(svr='prod', product=_cfg['my_prod'], url=None):
+def auth(svr='vps', product='01', url=None): #실제인경우product=_cfg['my_prod']
     p = {
         "grant_type": "client_credentials",
     }
@@ -184,7 +190,7 @@ def auth(svr='prod', product=_cfg['my_prod'], url=None):
 
     # 기존 발급된 토큰이 있는지 확인
     saved_token = read_token()  # 기존 발급 토큰 확인
-    # print("saved_token: ", saved_token)
+    print("saved_token: ", saved_token)
     if saved_token is None:  # 기존 발급 토큰 확인이 안되면 발급처리
         url = f'{_cfg[svr]}/oauth2/tokenP'
         res = requests.post(url, data=json.dumps(p), headers=_getBaseHeader())  # 토큰 발급
@@ -326,26 +332,23 @@ def _url_fetch(api_url, ptr_id, tr_cont, params, appendHeaders=None, postFlag=Fa
     headers["custtype"] = "P"  # 일반(개인고객,법인고객) "P", 제휴사 "B"
     headers["tr_cont"] = tr_cont  # 트랜젝션 TR id
 
-
     if appendHeaders is not None:
         if len(appendHeaders) > 0:
             for x in appendHeaders.keys():
                 headers[x] = appendHeaders.get(x)
-
     if (_DEBUG):
         print("< Sending Info >")
         print(f"URL: {url}, TR: {tr_id}")
         print(f"<header>\n{headers}")
         print(f"<body>\n{params}")
-
     if (postFlag):
         #if (hashFlag): set_order_hash_key(headers, params)
         res = requests.post(url, headers=headers, data=json.dumps(params))
     else:
         res = requests.get(url, headers=headers, params=params)
-
     if res.status_code == 200:
         ar = APIResp(res)
+        print('0000000000000000000000',ar.getBody())
         if (_DEBUG): ar.printAll()
         return ar
     else:
