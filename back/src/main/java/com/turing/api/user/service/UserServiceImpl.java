@@ -43,9 +43,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Messenger save(User user) {
-        if(existsById(user.getId()))repository.save(user);
-        return new Messenger();
+    public Messenger save(UserDto userDto) {
+        log.info(String.valueOf(userDto));
+        User user = dtoToEntity(userDto);
+        boolean flag = repository.existsByUsername(user.getUsername());
+        if (!flag) repository.save(user);
+        return Messenger.builder()
+                .message((flag)?"이미 있는 아이디 입니다.":"저장 성공")
+                .build();
     }
 
     @Override
@@ -61,12 +66,22 @@ public class UserServiceImpl implements UserService {
                      .build();
          }
     }
-
+    @Transactional
     @Override
-    public Messenger modify(User user) {
-        return Messenger.builder()
-                .message(repository.save(user).toString())
-                .build();
+    public Messenger modify(UserDto userDto) {
+        User user = repository.findById(userDto.getId()).get();
+        if (userDto.getUsername() != null && !userDto.getUsername().equals("")) {
+            user.setUsername(userDto.getUsername());
+        }
+        user.setName(userDto.getName());
+        user.setPassword(userDto.getPassword());
+        user.setAddressId(userDto.getAddressId());
+        user.setPhone(userDto.getPhone());
+        repository.save(user);
+
+        return repository.findById(userDto.getId()).get().equals(user) ?
+                Messenger.builder().message("SUCCESS").build() :
+                Messenger.builder().message("FAILURE").build();
     }
 
     @Override
@@ -87,24 +102,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Messenger login(UserDto userDto) {
         var user = repository.findByUsername(userDto.getUsername());
-        log.info(user.getPassword());
-        log.info(userDto.getPassword());
-        var token = jwtProvider.createToken(entityToDto(user));
+        var token = jwtProvider.makeToken(entityToDto(user));
         var flag = user.getPassword().equals(userDto.getPassword());
-        log.info(String.valueOf(flag));
-        repository.modifyTokenById(token,user.getId());
-        jwtProvider.printPayload(token);
-
+        repository.modifyTokenById(token.getRefreshToken(),user.getId());
+        jwtProvider.printPayload(token.getRefreshToken());
+        jwtProvider.printPayload(token.getAccessToken());
         return Messenger.builder()
                 .message(flag? "SUCCESS":"FAIL")
-                .accessToken(flag?token:"None")
+                .accessToken(flag?token.getAccessToken():"None")
+                .refreshToken(flag?token.getRefreshToken():"None")
                 .build();
-//        User user = re.findByUsername(userDto.getUsername());
-//        if(userDto.getPassword().equals(user.getPassword())){
-//            return Messenger.builder().message("SUCCESS").build();
-//        }else{
-//            return Messenger.builder().message("FAIL").build();
-//        }
     }
 
 

@@ -7,6 +7,7 @@ export interface IUser{
     addressId?: number
     job?: string
     email? : string
+    token? : string
     regDate? : string
     modDate? : string
     

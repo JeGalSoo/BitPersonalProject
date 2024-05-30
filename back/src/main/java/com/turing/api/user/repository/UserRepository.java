@@ -1,6 +1,5 @@
 package com.turing.api.user.repository;
 
-import com.turing.api.article.model.Article;
 import com.turing.api.user.model.User;
 import com.turing.api.user.model.UserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,5 +24,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByToken(String token);
 
-    List<Article> findAllByOrderByIdDesc();
 }

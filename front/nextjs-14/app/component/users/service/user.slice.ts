@@ -70,6 +70,10 @@ export const getExistId = (state: any) => {
     console.log('2313123'+state.user.data)
     return state.user.data
 }
+export const getSingleUser = (state: any) => {
+    console.log('slice',state.user.message)
+    return state.user.data
+}
 
 export const {} = userSlice.actions
 export const { usernameHandler, nameHandler, phoneHandler, jobHandler } = userSlice.actions

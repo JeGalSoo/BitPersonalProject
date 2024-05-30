@@ -9,13 +9,14 @@ import com.turing.api.user.model.UserDto;
 import java.util.List;
 
 
-public interface UserService extends CommandService<User>, QueryService<UserDto> {
+public interface UserService extends CommandService<UserDto>, QueryService<UserDto> {
     List<?> findByName(String name);
     List<?> findByJob(String job);
     default User dtoToEntity(UserDto dto) {
         return User.builder()
                 .id(dto.getId())
                 .username(dto.getUsername())
+                .password(dto.getPassword())
                 .name(dto.getName())
                 .phone(dto.getPhone())
                 .job(dto.getJob())

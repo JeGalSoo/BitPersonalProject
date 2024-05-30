@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthService{
         boolean flag = re.findByUsername(userDto.getUsername()).getPassword().equals(userDto.getPassword());
         User user = re.findByUsername(userDto.getUsername());
         return Messenger.builder()
-                .message(flag? "SUCCESS":"FILURE")
+                .message(flag? "SUCCESS":"FAILURE")
                 .accessToken(flag?createToken(userDto):"None")
                 .build();
     }

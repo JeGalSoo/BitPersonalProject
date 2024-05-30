@@ -1,4 +1,4 @@
-import { IBoard } from "../model/board";
+import { IBoard } from "../model/item";
 
 export const initialState:IBoard = {
     id : 0,

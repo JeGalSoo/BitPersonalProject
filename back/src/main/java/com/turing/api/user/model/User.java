@@ -1,6 +1,5 @@
 package com.turing.api.user.model;
 
-import com.turing.api.article.model.Article;
 import com.turing.api.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +16,7 @@ import java.util.List;
 public class User extends BaseEntity {
     @Id
     @Column(name = "user_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
         private String username;
     private String password;
@@ -26,6 +25,4 @@ public class User extends BaseEntity {
     private Long addressId;
     private String job;
     private String token;
-    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL)
-    private List<Article> articles;
 }

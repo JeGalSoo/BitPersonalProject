@@ -64,12 +64,14 @@ export default function UserPage(props: any) {
           {Typography12('회원 정보 수정', "1.5rem")}
           <input
             {...register('id')}
+            placeholder="id"
             type="hidden"
             value={props.params.id} />
           <div className="username-wrapper">
             <input
               {...register('username',{required:true})}
               className="username mt-2 bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
+              placeholder="username"
               type="text"
               value={userInfo.username} //----------------------------------------
               readOnly
@@ -79,7 +81,7 @@ export default function UserPage(props: any) {
           <input
             {...register('password', {maxLength: 20,required:true })}
             className="password bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
-            placeholder="Password"
+            placeholder="password"
             type="text"
             name="password"
             defaultValue={userInfo.password} //---------------------------------------
@@ -87,7 +89,7 @@ export default function UserPage(props: any) {
           <input
             {...register('name', {maxLength: 20, required:true })}
             className="name bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
-            placeholder="Name"
+            placeholder="name"
             type="text"
             name="name"
             defaultValue={userInfo.name} //-------------------------------------------
@@ -95,19 +97,11 @@ export default function UserPage(props: any) {
           <input
             {...register('phone', { maxLength: 20, required:true })}
             className="phone bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
-            placeholder="Phone"
+            placeholder="phone"
             type="text"
             name="phone"
             defaultValue={userInfo.phone} //-------------------------------------------
            />
-          <input
-            {...register('job', { maxLength: 20,required:true })}
-            className="job bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
-            placeholder="Job"
-            type="text"
-            name="job"
-            defaultValue={userInfo.job} //-------------------------------------------
-            />
           {/* <!-- buttons --> */}
           <div className="buttons flex justify-center gap-5">
             <div className="btn justify-items-center overflow-hidden relative w-30 bg-white text-blue-500 p-3 px-4 rounded-xl font-bold uppercase -- behtmlFore:block behtmlFore:absolute behtmlFore:h-full behtmlFore:w-1/2 behtmlFore:rounded-full

@@ -92,7 +92,7 @@ const HomePage: NextPage = () => {
               console.log('서버에서 넘어온 메시지' + parseCookies().message)
               console.log('서버에서 넘어온 토큰' + parseCookies().accessToken)
               console.log('토큰을 decode한 내용 : ' + JSON.stringify(jwtDecode<any>(parseCookies().accessToken)))
-              router.push(`${PG.BOARD}/list`)
+              location.replace(`${PG.BOARD}/list`)
             })
             .catch((err: any) => {
               console.log('로그인 실패')

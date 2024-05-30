@@ -1,6 +1,45 @@
+'use client'
+
+import { IUser } from "@/app/component/users/model/user";
+import { joinUser } from "@/app/component/users/service/user.service";
+import { getSingleUser } from "@/app/component/users/service/user.slice";
+import { PG } from "@/redux/common/enums/PG";
+import { log } from "console";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+
 const RegistartionForm = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [user, setUser] = useState({} as IUser)
+  const join = useSelector(getSingleUser);
+
+  const handleUsername = (e: any) => {
+    const {
+      target: { value, name }
+    } = e;
+    setUser(dto => ({ ...dto, [name]: value }));
+  }
+
+  // useEffect(()=>{
+  //   console.log('여기는 유지이펙트',join)
+  //   if(join==='저장 성공'){
+  //     router.push(`${PG.HOME}`)
+  //   }else{
+  //     console.log('실패')
+  //   }
+  // },[join])
+  
+
+
+  const handleSubmit = () => {
+    console.log(user)
+    dispatch(joinUser(user))
+    router.push(`${PG.HOME}`)
+  }
   return (
     <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl bg-white border shadow sm:rounded-lg flex justify-center flex-1">
@@ -27,24 +66,29 @@ const RegistartionForm = () => {
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
-                  placeholder="Enter your name"
-                />
-                <input
-                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="email"
-                  placeholder="Enter your email"
-                />
-                <input
-                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="tel"
-                  placeholder="Enter your phone"
+                  placeholder="Enter your username"  name="username" onChange={handleUsername}
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Enter your password" name="password" onChange={handleUsername}
                 />
-                <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                <input
+                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="text"
+                  placeholder="Enter your name" name="name" onChange={handleUsername}
+                />
+                <input
+                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="phone"
+                  placeholder="Enter your phone" name="phone" onChange={handleUsername}
+                />
+                <input
+                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="text"
+                  placeholder="Enter your address" name="address" onChange={handleUsername}
+                />
+                <button onClick={handleSubmit} className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                   <svg
                     className="w-6 h-6 -ml-2"
                     fill="none"

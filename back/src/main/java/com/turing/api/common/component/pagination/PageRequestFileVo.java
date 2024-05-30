@@ -1,6 +1,6 @@
 package com.turing.api.common.component.pagination;
 
-import com.turing.api.article.model.ArticleDto;
+import com.turing.api.article.model.ItemDto;
 import lombok.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ public class PageRequestFileVo {
     private String type;
     private String keyword;
 
-    private List<ArticleDto> pageFileDto;
+    private List<ItemDto> pageFileDto;
 
     public PageRequestFileVo( ) {
         this.page =1;

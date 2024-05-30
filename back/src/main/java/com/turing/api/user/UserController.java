@@ -60,8 +60,10 @@ public class UserController {
     }
 
     @PostMapping(path = "/save")
-    public ResponseEntity<Object> save(@RequestBody User user){
-        return ResponseEntity.ok(service.save(user));
+    public ResponseEntity<Object> save(@RequestBody UserDto userDto){
+        log.info("----------------------------------------------------");
+        log.info(String.valueOf(userDto));
+        return ResponseEntity.ok(service.save(userDto));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -70,8 +72,8 @@ public class UserController {
     }
 
     @PostMapping("/modify")
-    public ResponseEntity<Messenger> modify(@RequestBody User user){
-        return ResponseEntity.ok(service.modify(user));
+    public ResponseEntity<Messenger> modify(@RequestBody UserDto userDto){
+        return ResponseEntity.ok(service.modify(userDto));
     }
 
     @PostMapping("path = search")

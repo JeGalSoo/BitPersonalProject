@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.security.Keys;
@@ -22,21 +23,33 @@ public class JwtProvider {
 
     private final SecretKey secretkey;
 
-    Instant expiredDate = Instant.now().plus(1, ChronoUnit.DAYS);
+//    조건문으로 하려고 밑에서 따로 선언
+//    Instant expiredDate = (Instant.now().plus(1, ChronoUnit.DAYS));
+
+    public enum TokenType{REFRESH,ACCESS}
+
+    public TokenVo makeToken(UserDto userDto){
+        return TokenVo.builder()
+                .email(userDto.getUsername())
+                .role(userDto.getJob())
+                .refreshToken(createToken(userDto,Arrays.asList(userDto.getJob()),TokenType.REFRESH))
+                .accessToken(createToken(userDto, Arrays.asList(userDto.getJob()),TokenType.ACCESS))
+                .build();
+    }
 
     public JwtProvider (@Value("${jwt.secret}") String secretKey){
         this.secretkey = Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(secretKey));
 
     }
 
-    public String createToken(UserDto userDto) {
+    public String createToken(UserDto userDto, List<String> roles, TokenType tokenType) {
         String token = Jwts.builder()
                 .issuer(issuer)
                 .signWith(secretkey)
-                .expiration(Date.from(expiredDate))
-                .subject("turing")
+                .expiration(Date.from((tokenType.equals(TokenType.ACCESS))?Instant.now().plus(1, ChronoUnit.DAYS):Instant.now().plus(1, ChronoUnit.MINUTES)))
+                .subject("james")
                 .claim("username", userDto.getUsername())
-                .claim("job", userDto.getJob())
+                .claim("role", roles)
                 .claim("id", userDto.getId())
                 .compact();
 

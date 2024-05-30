@@ -27,6 +27,18 @@ export const findByIdAPI = async (id: any) =>{
     }
 }
 
+export const joinAPI = async (user: any) =>{
+    try{
+        const response = await instance().post('/users/save', user)
+        console.log(user)
+        console.log('여기는 api',response.data)
+        return response.data
+    }catch(error){
+        console.log(error)
+        return error
+    }
+}
+
 export const deleteByIdAPI = async (id: any) =>{
     try{
         const response = await instance().delete(`/users/delete/${id}`,{

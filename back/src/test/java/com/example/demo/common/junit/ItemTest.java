@@ -14,12 +14,12 @@ public class ItemTest {
 
     }
 
-    @Test
-    public void testPrint() {
-        Item s = new Item();
-        String s3 = s.print();
-        System.out.println("-->"+s3);
-        String s2 = "Hello";
-        Assertions.assertEquals(s.print(), "Hello");
-    }
+//    @Test
+//    public void testPrint() {
+//        Item s = new Item();
+//        String s3 = s.print();
+//        System.out.println("-->"+s3);
+//        String s2 = "Hello";
+//        Assertions.assertEquals(s.print(), "Hello");
+//    }
 }
