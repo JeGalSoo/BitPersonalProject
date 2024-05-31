@@ -8,6 +8,8 @@ import com.turing.api.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,6 +21,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private final JwtProvider jwtProvider;
     private final UserRepository repository;
+    private final PasswordEncoder bc;
 
 
     @Override
@@ -103,7 +106,7 @@ public class UserServiceImpl implements UserService {
     public Messenger login(UserDto userDto) {
         var user = repository.findByUsername(userDto.getUsername());
         var token = jwtProvider.makeToken(entityToDto(user));
-        var flag = user.getPassword().equals(userDto.getPassword());
+        var flag = bc.matches(userDto.getPassword(),user.getPassword());
         repository.modifyTokenById(token.getRefreshToken(),user.getId());
         jwtProvider.printPayload(token.getRefreshToken());
         jwtProvider.printPayload(token.getAccessToken());

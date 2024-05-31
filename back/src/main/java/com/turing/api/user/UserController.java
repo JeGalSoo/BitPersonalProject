@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -29,6 +31,7 @@ import java.util.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final UserService service;
+    private final PasswordEncoder bc;
 
 
     @GetMapping("/list")
@@ -62,6 +65,8 @@ public class UserController {
     @PostMapping(path = "/save")
     public ResponseEntity<Object> save(@RequestBody UserDto userDto){
         log.info("----------------------------------------------------");
+        userDto.setPassword(bc.encode(userDto.getPassword()));
+        log.info(userDto.getPassword());
         log.info(String.valueOf(userDto));
         return ResponseEntity.ok(service.save(userDto));
     }

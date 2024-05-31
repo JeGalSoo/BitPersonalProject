@@ -484,7 +484,7 @@ from pandas import DataFrame
 #         "ACNT_PRDT_CD": kis.getTREnv().my_prod, # 계좌상품코드 2자리
 #         "RSVN_ORD_SEQ": str(int(rsvn_ord_seq))  # 예약주문순번    [정정/취소]
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params, postFlag=True)
+#     res = kis._url_(url, tr_id, tr_cont, params, postFlag=True)
 
 #     if str(res.getBody().rt_cd) == "0":
 #         current_data = res.getBody().output  # getBody() kis_auth.py 존재
@@ -594,7 +594,7 @@ from pandas import DataFrame
 #         "CTX_AREA_FK200": FK100,         # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_FK200 값 : 다음페이지 조회시(2번째부터)
 #         "CTX_AREA_NK200": NK100          # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_NK200 값 : 다음페이지 조회시(2번째부터)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
+#     res = kis._url_(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
 
 #     # Assuming 'output1' is a dictionary that you want to convert to a DataFrame
 #     current_data = pd.DataFrame(res.getBody().output)
@@ -670,7 +670,7 @@ from pandas import DataFrame
 #         "CTX_AREA_FK100": FK100, # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_FK100 값 : 다음페이지 조회시(2번째부터)
 #         "CTX_AREA_NK100": NK100  # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_NK100 값 : 다음페이지 조회시(2번째부터)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)  # API 호출, kis_auth.py에 존재
+#     res = kis._url_(url, tr_id, tr_cont, params)  # API 호출, kis_auth.py에 존재
 
 #     # print(res.getBody())  # 오류 원인 확인 필요시 사용
 #     # Assuming 'output1' is a dictionary that you want to convert to a DataFrame
@@ -750,7 +750,7 @@ from pandas import DataFrame
 #         "CTX_AREA_FK100": FK100, # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_FK100 값 : 다음페이지 조회시(2번째부터)
 #         "CTX_AREA_NK100": NK100  # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_NK100 값 : 다음페이지 조회시(2번째부터)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # print(res.getBody().output2)  # 오류 원인 확인 필요시 사용
 #     # Assuming 'Output2' is a dictionary that you want to convert to a DataFrame
@@ -781,7 +781,7 @@ from pandas import DataFrame
 #         "CTX_AREA_FK100": FK100, # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_FK100 값 : 다음페이지 조회시(2번째부터)
 #         "CTX_AREA_NK100": NK100  # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_NK100 값 : 다음페이지 조회시(2번째부터)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
+#     res = kis._url_(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
 
 #     # Assuming 'output1' is a dictionary that you want to convert to a DataFrame
 #     current_data = pd.DataFrame(res.getBody().output1)
@@ -862,7 +862,7 @@ from pandas import DataFrame
 #         "CTX_AREA_FK100": FK100, # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_FK100 값 : 다음페이지 조회시(2번째부터)
 #         "CTX_AREA_NK100": NK100  # 공란 : 최초 조회시 이전 조회 Output CTX_AREA_NK100 값 : 다음페이지 조회시(2번째부터)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
+#     res = kis._url_(url, tr_id, tr_cont, params) # API 호출, kis_auth.py에 존재
 
 #     # Assuming 'output1' is a dictionary that you want to convert to a DataFrame
 #     current_data = pd.DataFrame(res.getBody().output1)
@@ -899,7 +899,7 @@ from pandas import DataFrame
 #         "FID_COND_MRKT_DIV_CODE": div_code, # 시장 분류 코드 	J : 주식/ETF/ETN, W: ELW
 #         "FID_INPUT_ISCD": itm_no            # 	종목번호 (6자리) ETN의 경우, Q로 시작 (EX. Q500001)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # Assuming 'output' is a dictionary that you want to convert to a DataFrame
 #     current_data = pd.DataFrame(res.getBody().output, index=[0])  # getBody() kis_auth.py 존재
@@ -922,7 +922,7 @@ from pandas import DataFrame
 #         "FID_COND_MRKT_DIV_CODE": div_code, # 시장 분류 코드 	J : 주식/ETF/ETN, W: ELW
 #         "FID_INPUT_ISCD": itm_no            # 	종목번호 (6자리) ETN의 경우, Q로 시작 (EX. Q500001)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # print(res.getBody())  # 오류 원인 확인 필요시 사용
 #     # Assuming 'output' is a dictionary that you want to convert to a DataFrame
@@ -976,7 +976,7 @@ from pandas import DataFrame
 #         "FID_COND_MRKT_DIV_CODE": div_code, # 시장 분류 코드 	J : 주식/ETF/ETN, W: ELW
 #         "FID_INPUT_ISCD": itm_no           # 종목번호 (6자리) ETN의 경우, Q로 시작 (EX. Q500001)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # print(res.getBody())  # 오류 원인 확인 필요시 사용
 #     # Assuming 'output1' is a dictionary that you want to convert to a DataFrame
@@ -1009,7 +1009,7 @@ from pandas import DataFrame
 #         "FID_COND_MRKT_DIV_CODE": div_code, # 시장 분류 코드 	J : 주식/ETF/ETN, W: ELW
 #         "FID_INPUT_ISCD": itm_no           # 종목번호 (6자리) ETN의 경우, Q로 시작 (EX. Q500001)
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # print(res.getBody())  # 오류 원인 확인 필요시 사용
 #     # Assuming 'output' is a dictionary that you want to convert to a DataFrame
@@ -1075,7 +1075,7 @@ def get_inquire_daily_itemchartprice(div_code, itm_no, tr_cont, inqr_strt_dt, in
         "FID_ORG_ADJ_PRC": adj_prc          # 수정주가 0:수정주가 1:원주가
     }
     print('1111111111111111111111',params)
-    res = kis._url_fetch(url, tr_id, tr_cont, params)
+    res = kis._url_(url, tr_id, tr_cont, params)
 
     # print(res.getBody())  # 오류 원인 확인 필요시 사용
     # Assuming 'output' is a dictionary that you want to convert to a DataFrame
@@ -1112,7 +1112,7 @@ def get_inquire_daily_itemchartprice(div_code, itm_no, tr_cont, inqr_strt_dt, in
 #         "FID_PERIOD_DIV_CODE": period_code, # 기간분류코드 D:일봉, W:주봉, M:월봉, Y:년봉
 #         "FID_ORG_ADJ_PRC": adj_prc          # 수정주가 0:수정주가 1:원주가
 #     }
-#     res = kis._url_fetch(url, tr_id, tr_cont, params)
+#     res = kis._url_(url, tr_id, tr_cont, params)
 
 #     # print(res.getBody())  # 오류 원인 확인 필요시 사용
 #     # Assuming 'output' is a dictionary that you want to convert to a DataFrame
