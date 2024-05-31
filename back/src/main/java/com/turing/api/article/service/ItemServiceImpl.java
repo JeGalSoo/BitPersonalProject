@@ -1,11 +1,16 @@
 package com.turing.api.article.service;
 
 import com.turing.api.article.model.Item;
+import com.turing.api.article.model.ItemDto;
 import com.turing.api.article.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +28,21 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> findAll() {
         return re.findAll();
+    }
+
+    @Override
+    public List<Item> findDetail(Map<String,String> search) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        log.info("여기는 imp"+sdf);
+        String a = search.get("search");
+        log.info(a);
+        String b = search.get("sdate");
+        log.info(b);
+        Date b1 = sdf.parse(b);
+        log.info(String.valueOf(b1));
+        String c = search.get("edate");
+        Date c1 = sdf.parse(c);
+        return (re.findDetail(a, b1, c1));
     }
 
 

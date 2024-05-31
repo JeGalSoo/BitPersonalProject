@@ -66,7 +66,7 @@ const RegistartionForm = () => {
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
-                  placeholder="Enter your username"  name="username" onChange={handleUsername}
+                  placeholder="Enter your id"  name="username" onChange={handleUsername}
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

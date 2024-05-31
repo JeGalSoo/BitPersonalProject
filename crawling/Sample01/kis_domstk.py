@@ -1082,6 +1082,7 @@ def get_inquire_daily_itemchartprice(div_code, itm_no, tr_cont, inqr_strt_dt, in
     current_data = pd.DataFrame([res.getBody().output1], index=[0])  # 호가조회  * getBody() kis_auth.py 존재
 
     dataframe = current_data
+    dataframe.to_csv(f'C:\\Users\\soo\\study\\새 폴더 (2)\\crawling\\Sample01\\test.csv')
 
     return dataframe
 

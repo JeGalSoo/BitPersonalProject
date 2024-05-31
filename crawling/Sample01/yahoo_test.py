@@ -70,7 +70,7 @@ class total:
         yf.pdr_override()
         # self.filename = input('종목코드를 입력하세요')
         # 코스피 종합주가 지수
-        self.filename = '000660.KS'
+        self.filename = '000990.KS'
         #삼전(005930.KS), sk하이닉스(000660.KS), DB하이텍(000990.KS), 네패스(033640.KQ), 
         #후성(093370.KS), LG전자(066570.KS), LS ELECTRIC(010120.KS), **요거없음 -> SK시그넷(260870.KS), 
         #모트렉스(118990.KQ), 원익피앤이(217820.KQ), 신세계I&C(035510.KS)
@@ -78,9 +78,9 @@ class total:
         #데이터를 가져올 시작날짜
         # sdate = input('시작일 입력하세요')
         # edate = input('종료일 입력하세요')
-        sdate = '2012-02-26'
+        sdate = '2015-06-26'
         # #데이터를 가져올 최종날짜
-        edate = '2012-05-29'
+        edate = '2016-05-29'
 
         # KOSPI종합주가지수를 가져오려면 가져올 데이터의
         # 1. 인덱스 문자열,

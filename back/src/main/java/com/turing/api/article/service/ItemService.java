@@ -3,6 +3,8 @@ package com.turing.api.article.service;
 import com.turing.api.article.model.Item;
 import com.turing.api.article.model.ItemDto;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,4 +39,6 @@ public interface ItemService {
     List<Item> findByVolume();
 
     List<Item> findAll();
+
+    List<Item> findDetail(Map<String,String> search) throws ParseException;
 }

@@ -10,6 +10,7 @@ spring:
     init:
       platform: mysql
       mode: always
+      encoding: utf-8
   jpa:
     defer-datasource-initialization: true
     hibernate:

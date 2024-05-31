@@ -19,7 +19,6 @@ public class Item extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String item;
-    @NumberFormat(pattern = "###,###")
     private Float open;
     private Float high;
     private Float low;
@@ -28,7 +27,5 @@ public class Item extends BaseEntity {
     private int volume;
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Setter
-    private String formattedNumber;
 
 }

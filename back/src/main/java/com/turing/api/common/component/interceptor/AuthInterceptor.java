@@ -23,36 +23,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        String token = jwt.extractTokenFromHeader(request);
-//        if (ObjectUtils.isEmpty(token)){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return false;
-//        }
-//        String strId = jwt.getPayload(token);
-//        Long id = Long.parseLong(strId);
-//
-//        Optional<User> user = Optional.of(re.findById(id).get());
-//
-//        if(ObjectUtils.isEmpty(user)){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return false;
-//        }
-//        String token = jwt.extractTokenFromHeader(request);
-//        log.info("1-인터셉터 토큰 로그 bearer 포함 : ***********************************" + token);
-//        if (token.equals("undefined")) {
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return false;
-//        }
-//        Long id = jwt.getPayload(token).get("userId", Long.class); //Long.class는 디스크 정적 클래스를 나타냄(깅력한타입)
-//        log.info("2- 인터셉터 사용자 id : {}", id);
-//
-//        Optional<User> user = re.findById(id);
-//        log.info("3- 인터셉터 사용자 정보 : {}", user);
-//        if (!user.isPresent()) {
-//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-//            return false;
-//        }
-//        log.info("4- 인터셉터 최종 여부 : {}", true);
         return Stream.of(request)
                 .map(i->jwt.extractTokenFromHeader(i))
                 .filter(i->!i.equals("undefined"))

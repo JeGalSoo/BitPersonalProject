@@ -13,4 +13,4 @@ import sys
 # 토큰 발급
 ka.auth()
 # [국내주식] 기본시세 > 국내주식기간별시세(일/주/월/년) (현재)  (종목번호 6자리)
-rt_data = kb.get_inquire_daily_itemchartprice(div_code='J', itm_no="071050",tr_cont='', inqr_strt_dt='20230805', inqr_end_dt='20230809',period_code="D", adj_prc='1')
+rt_data = kb.get_inquire_daily_itemchartprice(div_code='J', itm_no="118990",tr_cont='', inqr_strt_dt='20230805', inqr_end_dt='20230809',period_code="D", adj_prc='1')

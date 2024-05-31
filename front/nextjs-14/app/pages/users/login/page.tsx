@@ -33,8 +33,7 @@ const LoginPage:NextPage=()=> {
             .then(res => { 
                 const message=res.data.message
                 alert(message)
-                if(message === 'SUCCESS'){
-                                        
+                if(message === 'SUCCESS'){        
                  }else if (message === 'FAIL'){
                  }else if (message === 'WRONG._PASSWORD'){
                  }else{

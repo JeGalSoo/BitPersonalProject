@@ -1,5 +1,17 @@
 import { PG } from "@/redux/common/enums/PG";
+import { jwtDecode } from "jwt-decode";
 import Link from "next/link";
+import { parseCookies } from "nookies";
+interface decodeType{
+    iss? : string
+    exp? : string
+    sub? : string
+    username?:string
+    name?:string
+    job? : string
+    id?:number
+  }
+const decodeData:decodeType = jwtDecode<any>(parseCookies().accessToken)
 
 interface ILinkButton{
     id:number,
@@ -18,8 +30,9 @@ export default function LinkButton({id,title,path}:ILinkButton){
 }
 
 export const linkButtonTitles = [
+    
     {id:3, title:'카운터', path:`${PG.DEMO}/counter`},
     {id:4, title:'게시판목록', path:`${PG.BOARD}/list`},
     {id:5, title:'게시글목록', path:`${PG.ARTICLE}/list`},
-    {id:6, title:'마이페이지', path:`${PG.USER}/detail/${"토큰값으로 사용자id넣기(long타입)"}`}
+    {id:6, title:'마이페이지', path:`${PG.USER}/detail/${decodeData.id}`}
 ]

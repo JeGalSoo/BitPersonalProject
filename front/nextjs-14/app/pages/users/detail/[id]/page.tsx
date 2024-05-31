@@ -62,6 +62,7 @@ export default function UserPage(props: any) {
         <label htmlFor="large" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Large select</label>
         <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
           {Typography12('회원 정보 수정', "1.5rem")}
+          <p>id</p>
           <input
             {...register('id')}
             placeholder="id"
@@ -76,8 +77,8 @@ export default function UserPage(props: any) {
               value={userInfo.username} //----------------------------------------
               readOnly
             />
-            <span className="hover-message">Hover message here</span>
           </div>
+          <p>password</p>
           <input
             {...register('password', {maxLength: 20,required:true })}
             className="password bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
@@ -86,6 +87,7 @@ export default function UserPage(props: any) {
             name="password"
             defaultValue={userInfo.password} //---------------------------------------
             />
+            <p>name</p>
           <input
             {...register('name', {maxLength: 20, required:true })}
             className="name bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
@@ -94,6 +96,7 @@ export default function UserPage(props: any) {
             name="name"
             defaultValue={userInfo.name} //-------------------------------------------
              />
+             <p>phone</p>
           <input
             {...register('phone', { maxLength: 20, required:true })}
             className="phone bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"

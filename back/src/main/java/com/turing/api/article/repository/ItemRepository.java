@@ -7,12 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item,Long> {
+public interface ItemRepository extends JpaRepository<Item,Long>, ItemDao{
     List<Item> findByOrderByVolume();
+
+    @Query(value = "select i from items i where i.item=:search and i.date between :state and :date")
+    List<Item> findDetail1(@Param("search") String search, @Param("state") Date sdate, @Param("date") Date edate);
 
 //    // JPQL Default방식
 //    @Query("select a from articles a where a.board.id = :boardId")

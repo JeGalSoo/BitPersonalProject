@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../users/service/user.service';
 import { jwtDecode } from 'jwt-decode';
 
-const pages = [/*'회원가입','로그인',*/ '카운터', '게시판목록', '게시글목록', '사용자목록'];
+const pages = [/*'회원가입','로그인', '카운터',*/ '게시판목록', '게시글목록', '사용자목록'];
 const rou = [PG.USER + "/join", PG.USER + "/login"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 interface decodeType{
@@ -93,22 +93,22 @@ function Header() {
         <img className="w-8 h-8 rounded-full" src="/public/img/images.png" alt="user photo" />
       </button>}
       {showProfile &&
-        <div className="flex px-4 py-3 float-end">
-          <span className="block text-sm text-gray-900 dark:text-white">{decodeData.username}</span>
+        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+        <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">          <span className="block text-sm text-gray-900 dark:text-white">{decodeData.username}</span>
           <span className="block text-sm  text-gray-500 truncate dark:text-gray-400 mx-5" onClick={myPageHandler}>마이페이지</span>
           <span className="block text-sm  text-gray-500 truncate dark:text-gray-400" onClick={logoutHandler}><a href='#'></a> Logout </span> 
+        </ul>
         </div>
       }
-      <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+      {/* <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
         <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           {linkButtonTitles.map((item) => (
             <li key={item.id}>
               <LinkButton id={item.id} title={item.title} path={item.path} />
             </li>
           ))}
-
         </ul>
-      </div>
+      </div> */}
     </div>
   </nav>);
 }

@@ -16,9 +16,9 @@ import java.util.List;
 public class User extends BaseEntity {
     @Id
     @Column(name = "user_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-        private String username;
+    private String username;
     private String password;
     private String name;
     private String phone;

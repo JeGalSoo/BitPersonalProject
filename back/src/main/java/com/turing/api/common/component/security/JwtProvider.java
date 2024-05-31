@@ -23,9 +23,6 @@ public class JwtProvider {
 
     private final SecretKey secretkey;
 
-//    조건문으로 하려고 밑에서 따로 선언
-//    Instant expiredDate = (Instant.now().plus(1, ChronoUnit.DAYS));
-
     public enum TokenType{REFRESH,ACCESS}
 
     public TokenVo makeToken(UserDto userDto){
@@ -56,20 +53,6 @@ public class JwtProvider {
         log.info("로그인성공으로 발급된 토큰 " + token);
         return token;
     }
-
-//    public String getPayload(String token) {
-//        String[] chunks = token.split("\\.");
-//        Base64.Decoder decoder = Base64.getUrlDecoder();
-//        String header = new String(decoder.decode(chunks[0]));
-//        String payload = new String(decoder.decode(chunks[1]));
-//
-//        System.out.printf("accessToken header : "+header);
-//        System.out.printf("accessToken body : "+payload);
-//
-//        return header;
-//    }
-
-
 
     public String extractTokenFromHeader(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");

@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,11 @@ public class ItemController {
         return service.findAll();
     }
 
+    @PostMapping( path = "/detail")
+    public ResponseEntity<List<Item>> findAllByBoarId(@RequestBody Map<String,String> search, Date sdate, Date edate) throws ParseException {
+        log.info(search.toString());
+        return ResponseEntity.ok(service.findDetail(search));
+    }
 //    @PostMapping(path = "/save")
 //        public ResponseEntity<Messenger> save(@RequestBody ItemDto article){
 //        return ResponseEntity.ok(service.save(article));
@@ -60,11 +67,7 @@ public class ItemController {
 //        return ResponseEntity.ok(service.findAll());
 //    }
 //
-//    @GetMapping( path = "/detail")
-//    public ResponseEntity<List<ItemDto>> findAllByBoarId(@RequestParam Long id){
-//        System.out.println("여기입니다여기1111111111111111111234"+id);
-//        return ResponseEntity.ok(service.findAllByBoardId(id));
-//    }
+
 //
 //    @GetMapping("")
 //    public ResponseEntity<Long> count(){

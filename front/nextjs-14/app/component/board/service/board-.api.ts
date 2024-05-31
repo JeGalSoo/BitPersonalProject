@@ -11,5 +11,14 @@ export const findItemAllAPI = async () =>{
         console.log(error)
         return error
     }
-    
+}
+export const findItemDetailAPI = async (data:any) =>{
+    try{
+        const response = await instance().post('/item/detail',data)
+        console.log(' 게시판 리턴 ...',response.data)
+        return response.data
+    }catch(error){
+        console.log(error)
+        return error
+    }
 }
