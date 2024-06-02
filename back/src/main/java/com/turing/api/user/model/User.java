@@ -1,0 +1,28 @@
+package com.turing.api.user.model;
+
+import com.turing.api.common.BaseEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@Entity(name="users")
+@Builder
+public class User extends BaseEntity {
+    @Id
+    @Column(name = "user_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String username;
+    private String password;
+    private String name;
+    private String phone;
+    private Long addressId;
+    private String job;
+    private String token;
+}

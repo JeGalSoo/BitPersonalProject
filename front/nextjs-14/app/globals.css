@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.MuiDataGrid-cell{
+    border-right : solid 1px black;
+    border-bottom : solid 1px black;
+    font-size :
+}
+@layer utilities {
+    @variants responsive {
+        scroll-snap-align:start;
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+  }
+
+  .input-border {
+    border: 2px solid #000000; /* Green border */
+    padding: 5px;
+    border-radius: 4px;
+    width: 330px;  
+  }
+  .datepicker-border {
+    border: 2px solid #000000; /* Green border */
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 330px;
+  }
