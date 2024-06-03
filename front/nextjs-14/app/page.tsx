@@ -44,9 +44,9 @@ const HomePage: NextPage = () => {
 
 
   useEffect(() => {
-    destroyCookie(null, 'accessToken',{ httpOnly: false, path: '/' })
-    destroyCookie(null, 'refreshToken',{ httpOnly: false, path: '/' })
-    destroyCookie(null, 'message',{ httpOnly: false, path: '/' })
+    // destroyCookie(null, 'accessToken',{ httpOnly: false, path: '/' })
+    // destroyCookie(null, 'refreshToken',{ httpOnly: false, path: '/' })
+    // destroyCookie(null, 'message',{ httpOnly: false, path: '/' })
   },[])
 
   const handleSubmit = () => {
